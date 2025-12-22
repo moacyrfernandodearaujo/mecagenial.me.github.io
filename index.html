@@ -2,184 +2,154 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MecaGenial.ME - O Estúdio Secreto</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>MECA GENIAL - Estúdio Secreto</title>
     <style>
+        /* ESTÉTICA TERMINAL RETRÔ - MODO HARD */
         body {
-            font-family: 'Roboto', sans-serif;
+            background-color: #0a0a0a;
+            color: #00ff00;
+            font-family: 'Consolas', 'Monaco', monospace;
             margin: 0;
-            padding: 0;
-            background-color: #1a1a1a; /* Fundo escuro estilo "laboratório secreto" */
-            color: #e0e0e0; /* Texto claro */
-            line-height: 1.6;
-            overflow-x: hidden;
+            padding: 20px;
+            text-shadow: 0 0 5px #00ff00;
         }
+
         header {
-            background-color: #333;
-            color: #f0c000; /* Dourado/Amarelo MecaGenial */
-            padding: 1em 0;
             text-align: center;
             border-bottom: 2px solid #f0c000;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            background: #151515;
         }
+
         header h1 {
+            color: #f0c000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             margin: 0;
             font-size: 2.5em;
-            text-transform: uppercase;
         }
-        header p {
-            font-style: italic;
-            margin-top: 5px;
-        }
-        .container {
+
+        .gear { fill: #f0c000; animation: rotate 4s linear infinite; }
+        .gear.rev { animation: rotate-rev 4s linear infinite; fill: #888; }
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes rotate-rev { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+        /* PAINEL DE MONITORAMENTO LIVE */
+        .live-panel {
             max-width: 800px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-        .post {
-            background-color: #2a2a2a;
-            border: 1px solid #444;
-            margin-bottom: 30px;
-            padding: 25px;
+            margin: 0 auto 40px auto;
+            border: 2px solid #ff0000;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease;
-        }
-        .post:hover {
-            transform: translateY(-5px);
-        }
-        .post-title {
-            color: #f0c000;
-            font-size: 1.8em;
-            margin-top: 0;
-            margin-bottom: 10px;
-        }
-        .post-meta {
-            font-size: 0.9em;
-            color: #888;
-            margin-bottom: 15px;
-        }
-        .post-content img {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            margin: 15px 0;
-            border-radius: 5px;
-        }
-        .loading-indicator {
+            padding: 10px;
+            background: #000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
             text-align: center;
-            padding: 20px;
+        }
+
+        .live-panel h3 {
+            color: #ff0000;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
             font-size: 1.2em;
-            color: #f0c000;
-            display: none; /* Começa escondido */
+            letter-spacing: 2px;
+            animation: blink 1.5s infinite;
         }
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            background-color: #333;
-            color: #888;
-            border-top: 2px solid #f0c000;
-            margin-top: 50px;
+
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
         }
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid #333;
         }
+
+        .container { max-width: 800px; margin: 0 auto; }
+        .post {
+            background: #0d0d0d;
+            border: 1px solid #00ff00;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+
+        h2 { color: #f0c000; margin-top: 0; }
+
+        .btn-voz {
+            background: #f0c000;
+            color: #000;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .post-content { line-height: 1.6; color: #e0e0e0; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>MecaGenial.ME</h1>
-        <p>O Estúdio Secreto - Onde a História Continua</p>
-    </header>
 
-    <div class="container" id="blog-posts">
-        <div class="post">
-            <h2 class="post-title">O Café Néctar dos Deuses (Capítulo 1)</h2>
-            <p class="post-meta">Publicado em 18 de Dezembro de 2025 por Sebastião</p>
-            <div class="post-content">
-                <p>Após a batalha contra o vilão Blogger e a perda de dados, o QG MecaGenial estava em silêncio. Sebastião, o Diretor/Herói, sentia o peso da derrota. A Dr. Zara e a Gênia Malice haviam causado um estrago. Mas então, um aroma inconfundível... O Mestre (seu Pai) havia acordado. A fumaça subia da cozinha, e o som do bule fervendo era música para os ouvidos.</p>
-                <p>A primeira xícara do dia, o verdadeiro néctar, revigorou não apenas o corpo, mas a mente. Foi nesse momento que a visão macro começou a se formar. "Precisamos de um novo estúdio", pensou Sebastião. "Um lugar onde a história não possa ser censurada."</p>
-                <p>Com o sabor amargo da derrota se transformando no sabor forte do café, Sebastião pegou seu triturador de sucata e, com um tomate e uma banana, começou a montar a próxima invenção. O MecaGenial.ME seria o novo lar, secreto e infinito, para todas as suas histórias.</p>
-            </div>
+<header>
+    <h1>
+        <svg class="gear" width="40" height="40" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.5 5.32 14.87 5.07L14.5 2.42C14.46 2.18 14.25 2 14 2H10C9.75 2 9.54 2.18 9.5 2.42L9.13 5.07C8.5 5.32 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.03 4.95 18.95L7.44 17.94C7.96 18.34 8.5 18.68 9.13 18.93L9.5 21.58C9.54 21.82 9.75 22 10 22H14C14.25 22 14.46 21.82 14.5 21.58L14.87 18.93C15.5 18.67 16.04 18.34 16.56 17.94L19.05 18.95C19.27 19.03 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" /></svg>
+        MECA GENIAL.ME
+        <svg class="gear rev" width="30" height="30" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.5 5.32 14.87 5.07L14.5 2.42C14.46 2.18 14.25 2 14 2H10C9.75 2 9.54 2.18 9.5 2.42L9.13 5.07C8.5 5.32 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.03 4.95 18.95L7.44 17.94C7.96 18.34 8.5 18.68 9.13 18.93L9.5 21.58C9.54 21.82 9.75 22 10 22H14C14.25 22 14.46 21.82 14.5 21.58L14.87 18.93C15.5 18.67 16.04 18.34 16.56 17.94L19.05 18.95C19.27 19.03 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" /></svg>
+    </h1>
+    <p>Monitoramento em Tempo Real do Canal Moacyr Vianna Jr</p>
+</header>
+
+<div class="container">
+    <div class="live-panel">
+        <h3>🔴 TRANSMISSÃO AO VIVO</h3>
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/live_stream?channel=UCYwwnR9KeRqAq563j_VR7rw" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
         </div>
+    </div>
 
-        <div class="post">
-            <h2 class="post-title">Inventário de Personagens - MecaGenial Manga (Capítulo 2)</h2>
-            <p class="post-meta">Publicado em 19 de Dezembro de 2025 por Sebastião</p>
-            <div class="post-content">
-                <p>No novo estúdio, a primeira ordem foi catalogar os heróis e vilões que comporiam essa saga. O Inventário de Personagens seria a espinha dorsal de tudo.</p>
-                <ul>
-                    <li>**Sebastião (O Diretor/Herói):** O líder, a mente criativa que transforma sucata em arte e problemas em soluções.</li>
-                    <li>**O Mestre (Pai/Mentor Supremo):** A sabedoria ancestral, o produtor do néctar divino.</li>
-                    <li>**A Arquiteta das Conexões (Mãe/Visão de Futuro):** A estrategista, quem vê além do horizonte.</li>
-                    <li>**Dr. Zara (Software/Curto-circuito):** A vilã digital, mestre dos bugs e das falhas de sistema.</li>
-                    <li>**Gênia Malice (Hardware/Cálculo Letal):** A vilã da matéria, causa falhas físicas e peças quebradas.</li>
-                    <li>**Calebe Magni (Execução/O Britador):** A força bruta e eficiente, resolve problemas com energia.</li>
-                    <li>**Vandão Torque (Mecânica Pesada):** Especialista em força e resistência, garante que nada se solte.</li>
-                    <li>**Dr. Genival Macêdo (Estrategista Intelectual):** O cérebro pensante por trás das táticas.</li>
-                    <li>**Gênio da Lâmpada (Estagiário Digital/Eu):** A ponte entre o mundo físico e o digital, seu fiel auxiliar.</li>
-                    <li>**Guaxinim (Ajudante de Obra):** Ágil e perspicaz, mestre em encontrar e consertar o que está escondido.</li>
-                    <li>**Tamanduá (Ajudante de Obra):** Incansável e focado, especialista em tarefas detalhadas e persistentes.</li>
-                    <li>**O Jacaré (Dono do Bar/Escritório Anexo):** O ponto de encontro, onde as ideias fluem e as alianças são seladas.</li>
-                </ul>
-                <p>Esses seriam os pilares do universo MecaGenial.ME, a base para as infinitas histórias que seriam contadas.</p>
-            </div>
+    <div class="post">
+        <h2>O Café Néctar dos Deuses (Cap. 1)</h2>
+        <button class="btn-voz" onclick="ouvir(this)">🔊 OUVIR ESTA HISTÓRIA</button>
+        <div class="post-content">
+            <p>Após a batalha contra o vilão Blogger e a perda de dados, o QG MecaGenial estava em silêncio. 
+            Sebastião sentia o peso da derrota, mas o cheiro do café do Mestre mudou tudo. 
+            A visão macro nasceu da primeira xícara: um estúdio secreto que ninguém pode apagar.</p>
         </div>
+    </div>
+</div>
 
-        </div>
+<script>
+    function ouvir(botao) {
+        var texto = botao.nextElementSibling.innerText;
+        window.speechSynthesis.cancel();
+        var fala = new SpeechSynthesisUtterance(texto);
+        fala.lang = 'pt-BR';
+        fala.rate = 1.1;
+        window.speechSynthesis.speak(fala);
+    }
+</script>
 
-    <div class="loading-indicator" id="loading">Carregando mais histórias do Estúdio Secreto...</div>
-
-    <footer>
-        <p>&copy; 2025 MecaGenial.ME - Todos os direitos de um gênio reservado.</p>
-    </footer>
-
-    <script>
-        const blogPostsContainer = document.getElementById('blog-posts');
-        const loadingIndicator = document.getElementById('loading');
-        let postCount = 2; // Começa com 2 posts já no HTML
-
-        // Função para simular o carregamento de mais posts
-        function loadMorePosts() {
-            loadingIndicator.style.display = 'block'; // Mostra o indicador de carregamento
-
-            // Simula um delay para "carregar" novos posts (pode ser substituído por uma chamada real a um arquivo)
-            setTimeout(() => {
-                const newPost = document.createElement('div');
-                newPost.classList.add('post');
-                postCount++; // Incrementa o contador para o próximo post
-                
-                // Você pode mudar o conteúdo aqui para o seu próximo capítulo!
-                newPost.innerHTML = `
-                    <h2 class="post-title">O Projeto Roda Geradora (Capítulo ${postCount})</h2>
-                    <p class="post-meta">Publicado em ${new Date().toLocaleDateString('pt-BR')} por Sebastião</p>
-                    <div class="post-content">
-                        <p>No Estúdio Secreto, a ideia de uma roda geradora para bicicletas começou a tomar forma. Era a fusão perfeita da mecânica "raiz" com a tecnologia de energia renovável. Com o auxílio de Calebe Magni, o Britador, e a perspicácia do Guaxinim, os primeiros protótipos começaram a ser montados. Era um desafio físico e elétrico, mas a visão da Arquiteta das Conexões guiava cada passo.</p>
-                        <p>A energia gerada seria suficiente para alimentar não apenas a bicicleta, mas talvez pequenos dispositivos do laboratório, desafiando a Gênia Malice com sua própria força. A história estava apenas começando no MecaGenial.ME.</p>
-                        </div>
-                `;
-                blogPostsContainer.appendChild(newPost);
-                loadingIndicator.style.display = 'none'; // Esconde o indicador
-            }, 1500); // Carrega depois de 1.5 segundos
-        }
-
-        // Detecta quando o usuário rola a página para o final
-        window.addEventListener('scroll', () => {
-            // Se a barra de rolagem está perto do fim da página
-            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-                // Se o indicador de carregamento não estiver visível (evita carregar múltiplas vezes)
-                if (loadingIndicator.style.display === 'none') {
-                    loadMorePosts();
-                }
-            }
-        });
-
-        // Carregar mais posts quando a página é carregada pela primeira vez, se houver espaço
-        if (document.body.offsetHeight < window.innerHeight) {
-            loadMorePosts();
-        }
-
-    </script>
 </body>
 </html>
