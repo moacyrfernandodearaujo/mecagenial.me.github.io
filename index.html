@@ -2,129 +2,177 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="60">
-    <title>MECA GENIAL - Estúdio Secreto</title>
+    <meta http-equiv="refresh" content="60"> <title>MECA GENIAL - COMMAND CENTER</title>
     <style>
+        :root {
+            --neon-green: #00ff00;
+            --warning-red: #ff0000;
+            --meca-gold: #f0c000;
+            --bg-dark: #050505;
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #00ff00;
-            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: var(--bg-dark);
+            color: var(--neon-green);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
-            text-shadow: 0 0 5px #00ff00;
+            line-height: 1.6;
         }
 
+        /* HEADER PROFISSIONAL */
         header {
-            text-align: center;
-            border-bottom: 2px solid #f0c000;
-            padding: 20px 0;
-            margin-bottom: 20px;
-            background: #151515;
+            background: rgba(20, 20, 20, 0.95);
+            border-bottom: 2px solid var(--meca-gold);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header h1 {
-            color: #f0c000;
+        .logo-area { display: flex; align-items: center; gap: 15px; }
+        
+        /* LED DE STATUS REALISTA */
+        .status-box {
+            background: #1a1a1a;
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid #333;
+            font-size: 0.8rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin: 0;
-            font-size: 2.5em;
         }
 
-        /* LED DE STATUS */
-        .status-led {
-            height: 10px; width: 10px; background: #00ff00; border-radius: 50%;
-            display: inline-block; box-shadow: 0 0 8px #00ff00;
-            animation: pulse 1.5s infinite; margin-right: 8px;
-        }
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-
-        /* ENGRENAGENS */
-        .gear { fill: #f0c000; animation: rotate 4s linear infinite; }
-        .gear.rev { animation: rotate-rev 4s linear infinite; fill: #888; }
-        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes rotate-rev { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
-
-        /* PAINEL DA LIVE */
-        .live-panel {
-            max-width: 800px; margin: 0 auto 40px auto;
-            border: 2px solid #ff0000; border-radius: 8px; padding: 10px;
-            background: #000; box-shadow: 0 0 20px rgba(255, 0, 0, 0.4); text-align: center;
+        .led {
+            height: 10px; width: 10px; background: var(--neon-green);
+            border-radius: 50%; display: inline-block; margin-right: 10px;
+            box-shadow: 0 0 10px var(--neon-green);
+            animation: pulse 2s infinite;
         }
 
-        .live-panel h3 { color: #ff0000; margin-bottom: 10px; animation: blink 1.5s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        /* CONTAINER PRINCIPAL */
+        .main-engine {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
 
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
-        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        /* PAINEL DE VÍDEO (REFORÇADO) */
+        .live-monitor {
+            background: #000;
+            border: 1px solid var(--warning-red);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
 
-        .container { max-width: 800px; margin: 0 auto; }
-        .post { background: #0d0d0d; border: 1px solid #00ff00; padding: 25px; margin-bottom: 30px; border-radius: 8px; }
+        .monitor-header {
+            background: var(--warning-red);
+            color: white;
+            padding: 5px 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+        }
 
-        .post-meta { color: #f0c000; font-size: 0.8em; margin-bottom: 15px; border-left: 3px solid #f0c000; padding-left: 10px; }
-        h2 { color: #f0c000; margin-top: 0; }
-        .btn-voz { background: #f0c000; color: #000; border: none; padding: 10px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-bottom: 20px; }
+        /* POSTS ESTILO TERMINAL */
+        .meca-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid #222;
+            border-left: 4px solid var(--meca-gold);
+            padding: 25px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            transition: 0.3s;
+        }
+
+        .meca-card:hover { border-color: var(--meca-gold); background: rgba(255, 255, 255, 0.05); }
+
+        .timestamp { color: var(--meca-gold); font-family: monospace; font-size: 0.85rem; }
+        
+        .btn-action {
+            background: var(--meca-gold);
+            color: #000;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>
-        <svg class="gear" width="40" height="40" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.5 5.32 14.87 5.07L14.5 2.42C14.46 2.18 14.25 2 14 2H10C9.75 2 9.54 2.18 9.5 2.42L9.13 5.07C8.5 5.32 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.03 4.95 18.95L7.44 17.94C7.96 18.34 8.5 18.68 9.13 18.93L9.5 21.58C9.54 21.82 9.75 22 10 22H14C14.25 22 14.46 21.82 14.5 21.58L14.87 18.93C15.5 18.67 16.04 18.34 16.56 17.94L19.05 18.95C19.27 19.03 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" /></svg>
-        MECA GENIAL.ME
-        <svg class="gear rev" width="30" height="30" viewBox="0 0 24 24"><path d="M12 15.5A3.5 3.5 0 0 1 8.5 12A3.5 3.5 0 0 1 12 8.5A3.5 3.5 0 0 1 15.5 12A3.5 3.5 0 0 1 12 15.5M19.43 12.97C19.47 12.65 19.5 12.33 19.5 12C19.5 11.67 19.47 11.34 19.43 11L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.96 19.05 5.05L16.56 6.05C16.04 5.66 15.5 5.32 14.87 5.07L14.5 2.42C14.46 2.18 14.25 2 14 2H10C9.75 2 9.54 2.18 9.5 2.42L9.13 5.07C8.5 5.32 7.96 5.66 7.44 6.05L4.95 5.05C4.73 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.65 4.57 12.97L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.03 4.95 18.95L7.44 17.94C7.96 18.34 8.5 18.68 9.13 18.93L9.5 21.58C9.54 21.82 9.75 22 10 22H14C14.25 22 14.46 21.82 14.5 21.58L14.87 18.93C15.5 18.67 16.04 18.34 16.56 17.94L19.05 18.95C19.27 19.03 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.97Z" /></svg>
-    </h1>
-    <div><span class="status-led"></span> Monitoramento em Tempo Real - Estúdio Secreto</div>
+    <div class="logo-area">
+        <img src="https://cdn-icons-png.flaticon.com/512/603/603197.png" width="40" style="filter: invert(1);">
+        <h1 style="margin:0; font-size: 1.5rem; letter-spacing: 2px;">MECA GENIAL <span style="font-weight:100; color:#888;">| SYSTEM</span></h1>
+    </div>
+    <div class="status-box">
+        <span class="led"></span> OPERACIONAL: MAVERIK900CV
+    </div>
 </header>
 
-<div class="container">
-    <div class="live-panel">
-        <h3>🔴 TRANSMISSÃO AO VIVO</h3>
-        <div class="video-container">
+<div class="main-engine">
+    
+    <div class="live-monitor">
+        <div class="monitor-header">
+            <span>🔴 SINAL AO VIVO</span>
+            <span>CAM_01</span>
+        </div>
+        <div style="position: relative; padding-bottom: 56.25%; height: 0;">
             <iframe 
-                src="https://www.youtube.com/embed/live_stream?channel=UC5mN2T7W83pY6uH58Sre4Gg&autoplay=1&mute=1" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                style="position: absolute; top:0; left:0; width:100%; height:100%;"
+                src="https://www.youtube.com/embed/live_stream?channel=UC5mN2T7W83pY6uH58Sre4Gg" 
+                frameborder="0" 
                 allowfullscreen>
             </iframe>
         </div>
     </div>
 
-    <div class="post">
-        <div class="post-meta">
-            📅 REGISTRO: <span id="data-post-1"></span><br>
-            👤 OPERADOR: MAVERIK900CV
+    <div id="logs">
+        <div class="meca-card">
+            <div class="timestamp"> [REGISTRO: <span class="auto-date"></span>] </div>
+            <h2 style="color: #fff;">O Café Néctar dos Deuses (Cap. 1)</h2>
+            <div class="content">
+                <p>Após a batalha contra o vilão Blogger e a perda de dados, o QG MECA GENIAL estava em silêncio. 
+                Sebastião sentia o peso da derrota, mas o cheiro do café do Mestre mudou tudo.</p>
+            </div>
+            <button class="btn-action" onclick="ouvir(this)">▶ REPRODUZIR ÁUDIO-LOG</button>
         </div>
-        <h2>O Café Néctar dos Deuses (Cap. 1)</h2>
-        <button class="btn-voz" onclick="ouvir(this)">🔊 OUVIR ESTA HISTÓRIA</button>
-        <div class="post-content">
-            <p>Após a batalha contra o vilão Blogger e a perda de dados, o QG MECA GENIAL estava em silêncio. 
-            Sebastião sentia o peso da derrota, mas o cheiro do café do Mestre mudou tudo. 
-            A visão macro nasceu da primeira xícara: um estúdio secreto que ninguém pode apagar.</p>
         </div>
-    </div>
-    </div>
+
+</div>
 
 <script>
-    // SISTEMA DE VOZ
-    function ouvir(botao) {
-        var texto = botao.nextElementSibling.innerText;
+    // Função para Data Automática Profissional
+    function setDates() {
+        const agora = new Date();
+        const texto = agora.toLocaleDateString('pt-BR') + " | " + agora.toLocaleTimeString('pt-BR');
+        document.querySelectorAll('.auto-date').forEach(el => el.textContent = texto);
+    }
+
+    // Função de Voz do Sistema
+    function ouvir(btn) {
+        const texto = btn.parentElement.querySelector('.content').innerText;
         window.speechSynthesis.cancel();
-        var fala = new SpeechSynthesisUtterance(texto);
+        const fala = new SpeechSynthesisUtterance(texto);
         fala.lang = 'pt-BR';
-        fala.rate = 1.1;
+        fala.rate = 1.0;
         window.speechSynthesis.speak(fala);
     }
 
-    // REGISTRO DE DATA AUTOMÁTICA
-    function configurarDatas() {
-        var agora = new Date();
-        var dataFormatada = agora.toLocaleDateString('pt-BR') + ' às ' + agora.toLocaleTimeString('pt-BR');
-        var elementoData = document.getElementById('data-post-1');
-        if(elementoData) elementoData.innerHTML = dataFormatada;
-    }
-
-    configurarDatas();
+    setDates();
 </script>
 
 </body>
